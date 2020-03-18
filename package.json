@@ -1,0 +1,24 @@
+{
+  "name": "run-url",
+  "version": "1.0.0",
+  "description": "🏃 Run a Node.js file from a URL, easily \"npx run-url https://example.com/script.js\"",
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AnandChowdhary/run-url.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/AnandChowdhary/run-url/issues"
+  },
+  "homepage": "https://github.com/AnandChowdhary/run-url#readme",
+  "devDependencies": {
+    "@types/node": "^13.9.1",
+    "typescript": "^3.8.3"
+  }
+}
