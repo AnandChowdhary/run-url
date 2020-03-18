@@ -21,7 +21,11 @@
   },
   "homepage": "https://github.com/AnandChowdhary/run-url#readme",
   "devDependencies": {
+    "@types/mkdirp": "^1.0.0",
     "@types/node": "^13.9.1",
     "typescript": "^3.8.3"
+  },
+  "dependencies": {
+    "mkdirp": "^1.0.3"
   }
 }
