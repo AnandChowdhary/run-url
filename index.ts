@@ -6,7 +6,7 @@ import fs from "fs";
 import mkdirp from "mkdirp";
 import { join, resolve } from "path";
 import { URL } from "url";
-import { cd, exec } from "shelljs";
+import { cd, exec, rm } from "shelljs";
 import modules from "builtin-modules";
 
 const url = process.argv[2];
@@ -15,7 +15,7 @@ if (!url) throw new Error("No URL found");
 const parsed = new URL(url);
 if (!parsed.protocol) throw new Error("Invalid URL");
 
-const rootDir = join(".cache");
+const rootDir = join("temp");
 
 mkdirp(rootDir).then(() => {
   const file = fs.createWriteStream(join(rootDir, "script.js"));
@@ -45,6 +45,9 @@ mkdirp(rootDir).then(() => {
           .filter(i => !modules.includes(i));
         cd(resolve(rootDir));
         exec(`npm install ${dependencies.join(" ")}`);
+        exec("node script.js");
+        exec("cd ..");
+        rm("-rf", rootDir);
       });
     }
   );
