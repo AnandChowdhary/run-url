@@ -2,6 +2,15 @@
 
 Simply run a Node.js file from a URL, installing dependencies and everything.
 
+[![GitHub Actions](https://github.com/AnandChowdhary/run-url/workflows/Node%20CI/badge.svg)](https://github.com/AnandChowdhary/run-url/actions)
+[![Travis CI](https://img.shields.io/travis/AnandChowdhary/run-url.svg)](https://travis-ci.org/AnandChowdhary/run-url)
+[![License](https://img.shields.io/github/license/anandchowdhary/run-url.svg)](https://github.com/AnandChowdhary/run-url/blob/master/LICENSE)
+![Vulnerabilities](https://img.shields.io/snyk/vulnerabilities/github/AnandChowdhary/run-url.svg)
+![NPM type definitions](https://img.shields.io/npm/types/run-url.svg)
+[![NPM](https://img.shields.io/npm/v/run-url.svg)](https://www.npmjs.com/package/run-url)
+
+[![NPM](https://nodei.co/npm/run-url.png)](https://www.npmjs.com/package/run-url)
+
 ## 💡 Usage
 
 ```bash
