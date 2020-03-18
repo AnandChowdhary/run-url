@@ -6,7 +6,7 @@ import fs from "fs";
 import mkdirp from "mkdirp";
 import { join, resolve } from "path";
 import { URL } from "url";
-import { cd, exec, ls } from "shelljs";
+import { cd, exec } from "shelljs";
 import modules from "builtin-modules";
 
 const url = process.argv[2];
@@ -27,6 +27,13 @@ mkdirp(rootDir).then(() => {
         const jsFile = fs.readFileSync(join(rootDir, "script.js"), {
           encoding: "utf8"
         });
+        fs.writeFileSync(
+          join(rootDir, "package.json"),
+          JSON.stringify({
+            name: "run-url-file",
+            private: true
+          })
+        );
         const dependencies = jsFile
           .split("require(")
           .filter(i => i.startsWith('"') || i.startsWith("'"))
@@ -36,7 +43,8 @@ mkdirp(rootDir).then(() => {
             return i;
           })
           .filter(i => !modules.includes(i));
-        exec(`cd ${resolve(rootDir)} && npm install ${dependencies.join(" ")}`);
+        cd(resolve(rootDir));
+        exec(`npm install ${dependencies.join(" ")}`);
       });
     }
   );
