@@ -27,6 +27,7 @@
     "typescript": "^3.8.3"
   },
   "dependencies": {
+    "builtin-modules": "^3.1.0",
     "mkdirp": "^1.0.3",
     "shelljs": "^0.8.3"
   }

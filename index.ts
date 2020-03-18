@@ -4,9 +4,10 @@ import https from "https";
 import http from "http";
 import fs from "fs";
 import mkdirp from "mkdirp";
-import { join } from "path";
+import { join, resolve } from "path";
 import { URL } from "url";
-import { cd } from "shelljs";
+import { cd, exec, ls } from "shelljs";
+import modules from "builtin-modules";
 
 const url = process.argv[2];
 if (!url) throw new Error("No URL found");
@@ -24,7 +25,12 @@ mkdirp(rootDir).then(() => {
       response.pipe(file);
     }
   );
-  request.on("close", () => {
-    console.log("COMPLETED");
+  request.on("finish", () => {
+    cd(resolve(rootDir));
+    const jsFile = fs.readFileSync(join(rootDir, "script.js"), {
+      encoding: "utf8"
+    });
+    console.log(jsFile);
+    exec("npm install");
   });
 });
