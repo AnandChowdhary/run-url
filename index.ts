@@ -23,14 +23,21 @@ mkdirp(rootDir).then(() => {
     url,
     response => {
       response.pipe(file);
+      response.on("end", () => {
+        const jsFile = fs.readFileSync(join(rootDir, "script.js"), {
+          encoding: "utf8"
+        });
+        const dependencies = jsFile
+          .split("require(")
+          .filter(i => i.startsWith('"') || i.startsWith("'"))
+          .map(i => {
+            if (i.includes("'")) i = i.split("'")[1];
+            if (i.includes('"')) i = i.split('"')[1];
+            return i;
+          })
+          .filter(i => !modules.includes(i));
+        exec(`cd ${resolve(rootDir)} && npm install ${dependencies.join(" ")}`);
+      });
     }
   );
-  request.on("finish", () => {
-    cd(resolve(rootDir));
-    const jsFile = fs.readFileSync(join(rootDir, "script.js"), {
-      encoding: "utf8"
-    });
-    console.log(jsFile);
-    exec("npm install");
-  });
 });
