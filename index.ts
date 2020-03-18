@@ -21,8 +21,8 @@ fs.mkdtemp(join(tmpdir(), "foo-"), (error, rootDir) => {
   mkdirp(rootDir).then(() => {
     const file = fs.createWriteStream(join(rootDir, "script.js"));
     (parsed.protocol === "https:" ? https : http).get(url, response => {
-      response.pipe(file);
-      response.on("end", () => {
+      const stream = response.pipe(file);
+      stream.on("close", () => {
         const jsFile = fs.readFileSync(join(rootDir, "script.js"), {
           encoding: "utf8"
         });
